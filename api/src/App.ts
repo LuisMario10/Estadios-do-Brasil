@@ -2,7 +2,7 @@ import express, { Express } from 'express';
 import { _ROUTER } from './routers';
 import 'dotenv/config'
 
-const _APP: Express = express();
+export const _APP: Express = express();
 
 _APP.use(express.json());
 
