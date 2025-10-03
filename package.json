@@ -1,15 +1,16 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto Node para praticar construção de API's",
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev --respawn -transpile-only ./src/App.ts",
     "build": "npx tsc",
-    "start": "node ./dist/App.js"
+    "start": "node ./dist/App.js",
+    "test": "jest"
   },
   "keywords": [],
-  "author": "",
+  "author": "Luis Mario",
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
