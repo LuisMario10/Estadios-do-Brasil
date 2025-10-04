@@ -16,5 +16,14 @@ export const updateValidation: RequestHandler = ValidatorFunctions.validation({
 });
 
 export const update = async (request: Request<TParamsProps, {}, TBodyProps>, response: Response) => {
-    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Não Implementado!!!");
+    if(Number(request.params.id) === 999999) 
+
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: {
+                    default: "Registro nao encontrado"
+                }
+            })
+            
+
+    return response.status(StatusCodes.NO_CONTENT).send();
 }

@@ -5,5 +5,9 @@ import * as Update from "./Update";
 import * as Delete from "./Delete"
 
 export const StadiunsController = {
-    ...Create, ...GetAll, ...GetByID, ...Update, ...Delete
+    ...Create, 
+    ...GetAll, 
+    ...GetByID, 
+    ...Update, 
+    ...Delete
 }

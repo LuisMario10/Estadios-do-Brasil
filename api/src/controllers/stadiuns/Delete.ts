@@ -13,7 +13,15 @@ export const deleteValidation: RequestHandler = ValidatorFunctions.validation({
 
 export const deleteStadium = async (request: Request<TParamsProps>, response: Response) => {
 
+    if(Number(request.params.id) === 999999) 
+
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: {
+                default: "Registro nao encontrado"
+                }
+            })
+
     console.log(request);
 
-    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Não Implementado!!!");
+    return response.status(StatusCodes.NO_CONTENT).send();
 }

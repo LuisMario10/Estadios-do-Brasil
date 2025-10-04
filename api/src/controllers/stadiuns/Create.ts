@@ -15,5 +15,5 @@ export const createValidation: RequestHandler = ValidatorFunctions.validation({
 
 export const create = async (request: Request<{}, {}, TBodyProps>, response: Response) => {
     console.log(request);
-    return response.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Não Implementado!!!");
+    return response.status(StatusCodes.CREATED).json({ id: 1 });
 }
