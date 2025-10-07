@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import { ValidatorFunctions } from "../../shared/middleware/validators";
 import { StatusCodes } from "http-status-codes";
-import { TBodyProps, TParamsProps } from "../../types";
+import { TBodyProps, TParamsProps } from "../../@types";
 import yup from "yup";
 
 export const updateValidation: RequestHandler = ValidatorFunctions.validation({

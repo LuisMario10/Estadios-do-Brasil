@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from 'http-status-codes'
 import { ValidatorFunctions } from "../../shared/middleware/validators";
-import { TParamsProps } from "../../types";
+import { TParamsProps } from "../../@types";
 import yup from "yup"
 
 

@@ -1,7 +1,7 @@
 import { Request, RequestHandler, Response } from "express";
 import { ValidatorFunctions } from "../../shared/middleware/validators";
 import { StatusCodes } from 'http-status-codes'
-import { TBodyProps } from "../../types";
+import { TBodyProps } from "../../@types";
 import yup from "yup"
 
 

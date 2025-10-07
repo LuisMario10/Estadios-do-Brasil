@@ -57,6 +57,7 @@ test/
 * [ ] **Atualizar** completamente um estádio (PUT)
 * [ ] **Atualizar** parcialmente os dados de um estádio (PATCH)
 * [ ] **Deletar** um estádio
+* [ ] **Validação** das requisições
 
 ---
 
@@ -66,13 +67,14 @@ test/
 
 ---
 
-## 💡 Tecnologias Sugeridas (opcional)
+## 💡 Tecnologias Sugeridas 
 
 * Node.js
 * TypeScript
 * Express.js
 * YUP 
 * Jest e Supertest
+* Knex
 * SQLite
 
 ---
