@@ -14,7 +14,7 @@ src/
   |
   |_controllers/
   |
-  |_types/
+  |_@types/
   |
   |__database/
   |
