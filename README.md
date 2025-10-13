@@ -67,14 +67,15 @@ test/
 
 ---
 
-## 💡 Tecnologias Sugeridas 
+## 💡 Tecnologias
 
 * Node.js
 * TypeScript
 * Express.js
 * YUP 
 * Jest e Supertest
-* Knex
-* SQLite
+* SQLite3
+* Monitoramento de Aplicação Node JS
+* Docker
 
 ---
