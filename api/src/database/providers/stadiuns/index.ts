@@ -5,9 +5,9 @@ import * as UpdateStadium from './GetAll';
 import * as DeleteStadium from './Delete';
 
 export const StadiumProviders = {
-    CreateStadium,
-    GetAllStadiuns,
-    GetByIDStadium,
-    UpdateStadium,
-    DeleteStadium
+    ...CreateStadium,
+    ...GetAllStadiuns,
+    ...GetByIDStadium,
+    ...UpdateStadium,
+    ...DeleteStadium
 }

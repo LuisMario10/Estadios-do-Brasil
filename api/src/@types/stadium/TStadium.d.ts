@@ -1,5 +1,5 @@
 export type TStadium = {
-    id: string
+    id: number | bigint
     name: string,
     capacity: number,
     constructionDate: string

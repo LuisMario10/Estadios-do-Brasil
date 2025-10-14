@@ -1,9 +1,9 @@
 import { Request, RequestHandler, Response } from "express";
 import { ValidatorFunctions } from "../../shared/middleware/validators";
 import { StatusCodes } from 'http-status-codes'
-import { TBodyProps } from "../../@types";
+import { StadiumProviders } from "../../database/providers";
+import { TBodyProps, TStadium } from "../../@types";
 import yup from "yup"
-
 
 export const createValidation: RequestHandler = ValidatorFunctions.validation({
     body: yup.object().shape({
@@ -14,6 +14,23 @@ export const createValidation: RequestHandler = ValidatorFunctions.validation({
 });
 
 export const create = async (request: Request<{}, {}, TBodyProps>, response: Response) => {
-    console.log(request);
-    return response.status(StatusCodes.CREATED).json({ id: 1 });
+
+    let result = null
+
+    try {
+        const stadiumDatas: Partial<TStadium> = {
+            name: request.body.name,
+            capacity: request.body.capacity,
+            constructionDate: request.body.constructionDate
+        }
+
+        result = StadiumProviders.createStadiumProvider(stadiumDatas);
+
+        return response.status(StatusCodes.CREATED).json({ id: result });
+    } catch {
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: {
+            default: result
+        } })
+    }
+
 }

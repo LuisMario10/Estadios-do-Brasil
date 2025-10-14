@@ -1,17 +1,19 @@
 import { _DATABASE, ETableName } from "../../config";
 import { TStadium } from "../../../@types";
 
-export const createStadiumProvider: number | bigint | unknown = (stadiumDatas: TStadium) => {
+export const createStadiumProvider=  (stadiumDatas: Partial<TStadium>): number | bigint | Error => {
     try {
         const dataBaseResult = _DATABASE
-            .prepare(`INSERT INTO ${ETableName.stadiuns} VALUES (?, ?, ?)`)
-            .run(stadiumDatas.name, stadiumDatas.capacity, stadiumDatas.constructionDate);
+        .prepare(`INSERT INTO ${ETableName.stadiuns} VALUES (?, ?, ?)`)
+        .run(
+            stadiumDatas.name, 
+            stadiumDatas.capacity,
+            stadiumDatas.constructionDate
+        );
 
-        return { id: dataBaseResult.lastInsertRowid };
+        return dataBaseResult.lastInsertRowid
 
     } catch(error) {
-        console.log(error);
-
-        return error
+        return Error("Erro ao criar registro de Estadio")
     }
 };
