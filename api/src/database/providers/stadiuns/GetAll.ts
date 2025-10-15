@@ -1,9 +1,8 @@
 import { _DATABASE, ETableName } from "../../config";
-import { TStadium } from "../../../@types";
 
 //Depois eu tipo isso, primeiro tem que fazer funcionar
 
-export const getAllStadiunsProvider = (stadiumDatas: TStadium) => {
+export const getAllStadiunsProvider = () => {
     try {
         const dataBaseResult = _DATABASE
             .prepare(`SELECT * FROM ${ETableName.stadiuns}`)

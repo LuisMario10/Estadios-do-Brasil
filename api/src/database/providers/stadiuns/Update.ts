@@ -1,7 +1,7 @@
 import { _DATABASE, ETableName } from "../../config";
 import { TStadium } from "../../../@types";
 
-export const updateStadiumProvider = (stadiumDatas: TStadium): void => {
+export const updateStadiumProvider = (stadiumDatas: Partial<TStadium>): void => {
     try {
         _DATABASE
             .prepare(`UPDATE ${ETableName.stadiuns} SET (?, ?, ?) WHERE id = ?`)

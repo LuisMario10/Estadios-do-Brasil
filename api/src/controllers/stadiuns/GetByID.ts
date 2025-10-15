@@ -1,7 +1,8 @@
 import { Request, RequestHandler, Response } from "express";
+import { TParamsProps, TStadium } from "../../@types";
 import { StatusCodes } from 'http-status-codes'
+import { StadiumProviders } from "../../database/providers";
 import { ValidatorFunctions } from "../../shared/middleware/validators";
-import { TParamsProps } from "../../@types";
 import yup from "yup"
 
 
@@ -15,14 +16,29 @@ export const getByIDValidation: RequestHandler = ValidatorFunctions.validation({
 
 export const getByID = async (request: Request<TParamsProps>, response: Response) => {
     if(Number(request.params.id) === 999999) 
-
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        return response.status(StatusCodes.NOT_FOUND).json({
                 errors: {
                     default: "Registro nao encontrado"
                 }
             })
+        
+    let result = undefined;    
 
-    return response.status(StatusCodes.OK).json([
-        { id: 12, name: "Morumbis", capacity: 80000, constructionDate: "07/05/1970" }
-    ]);
+    try {
+        const stadiumDatas: Partial<TStadium> = { id: request.params.id }
+
+        result = StadiumProviders.getByIDStadiumProvider(stadiumDatas);
+        return response.status(StatusCodes.OK).json({
+            statusCodes: StatusCodes.OK,
+            msg: "Resgatado Estadio via ID",
+            datas: result
+        })
+    } catch {   
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            statusCodes: StatusCodes.OK,
+            errors: {
+                default: result
+            }
+        })
+    }
 }

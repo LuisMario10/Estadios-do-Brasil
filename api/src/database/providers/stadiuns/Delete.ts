@@ -1,7 +1,7 @@
 import { _DATABASE, ETableName } from "../../config";
 import { TStadium } from "../../../@types";
 
-export const deleteStadiumProvider = (stadiumDatas: TStadium): number | Error => {
+export const deleteStadiumProvider = (stadiumDatas: Partial<TStadium>): number  | Error => {
     try {
         _DATABASE
             .prepare(`DELETE FROM ${ETableName.stadiuns} WHERE id = ?`)
@@ -10,6 +10,6 @@ export const deleteStadiumProvider = (stadiumDatas: TStadium): number | Error =>
         return 1;
 
     } catch {
-        return Error("Erro ao deletar Estadio")
+        return Error("Erro ao deletar Estadio");
     }
 };

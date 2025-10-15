@@ -1,7 +1,8 @@
 import { Request, RequestHandler, Response } from "express";
+import { TBodyProps, TParamsProps, TStadium } from "../../@types";
+import { StadiumProviders } from "../../database/providers";
 import { ValidatorFunctions } from "../../shared/middleware/validators";
 import { StatusCodes } from "http-status-codes";
-import { TBodyProps, TParamsProps } from "../../@types";
 import yup from "yup";
 
 export const updateValidation: RequestHandler = ValidatorFunctions.validation({
@@ -18,12 +19,34 @@ export const updateValidation: RequestHandler = ValidatorFunctions.validation({
 export const update = async (request: Request<TParamsProps, {}, TBodyProps>, response: Response) => {
     if(Number(request.params.id) === 999999) 
 
-        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-                errors: {
-                    default: "Registro nao encontrado"
-                }
-            })
+        return response.status(StatusCodes.NOT_FOUND).json({
+                    errors: {
+                        default: "Registro nao encontrado"
+                    }
+                })
             
+    let result = undefined;
 
-    return response.status(StatusCodes.NO_CONTENT).send();
+    try {
+        const stadiumDatas: Partial<TStadium> = {
+            id: request.params.id,
+            name: request.body.name,
+            capacity: request.body.capacity,
+            constructionDate: request.body.constructionDate
+        };
+
+        result = StadiumProviders.updateStadiumProvider(stadiumDatas);
+
+        return response.status(StatusCodes.NO_CONTENT).json({
+            statusCodes: StatusCodes.NO_CONTENT,
+            msg: "Regitro de Estadio atualizado",
+        })
+    } catch {
+        return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            statusCodes: StatusCodes.INTERNAL_SERVER_ERROR,
+            errors: {
+                default: result
+            }
+        })
+    }
 }

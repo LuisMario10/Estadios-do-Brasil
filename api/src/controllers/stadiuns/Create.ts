@@ -1,8 +1,8 @@
 import { Request, RequestHandler, Response } from "express";
-import { ValidatorFunctions } from "../../shared/middleware/validators";
+import { TBodyProps, TStadium } from "../../@types";
+import { ValidatorFunctions } from "../../shared/middleware";
 import { StatusCodes } from 'http-status-codes'
 import { StadiumProviders } from "../../database/providers";
-import { TBodyProps, TStadium } from "../../@types";
 import yup from "yup"
 
 export const createValidation: RequestHandler = ValidatorFunctions.validation({
@@ -15,7 +15,7 @@ export const createValidation: RequestHandler = ValidatorFunctions.validation({
 
 export const create = async (request: Request<{}, {}, TBodyProps>, response: Response) => {
 
-    let result = null
+    let result: number | bigint | Error | undefined = undefined;
 
     try {
         const stadiumDatas: Partial<TStadium> = {
@@ -26,11 +26,15 @@ export const create = async (request: Request<{}, {}, TBodyProps>, response: Res
 
         result = StadiumProviders.createStadiumProvider(stadiumDatas);
 
-        return response.status(StatusCodes.CREATED).json({ id: result });
+        return response.status(StatusCodes.CREATED).json({ 
+            id: result 
+        });
+        
     } catch {
         return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: {
-            default: result
-        } })
+                default: result
+            } 
+        })
     }
 
 }
